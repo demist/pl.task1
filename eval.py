@@ -54,8 +54,11 @@ for i in range(len(data)):
 	for j in range(len(data[i])):
 		if data[i][j][0] == '=':
 			code = re.sub('[A-Z][0-9]*', repl, data[i][j][1:])
-			res = eval(code, globals(), l)
-			data[i][j] = res
+			try:
+				res = eval(code, globals(), l)
+				data[i][j] = res
+			except:
+				data[i][j] = "ERROR"
 		else:
 			if isFloat(data[i][j]):
 				if isInt(data[i][j]) and int(data[i][j]) == float(data[i][j]):
